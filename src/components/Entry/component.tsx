@@ -9,7 +9,7 @@ type Props = {
 
 const Entry: React.FC<Props> = ({ title, image, date }) => {
   return (
-    <div className="relative flex cursor-pointer gap-x-5 rounded bg-slate-200 p-5 shadow duration-300 ease-in-out hover:shadow-lg">
+    <div className="relative flex h-full cursor-pointer gap-x-5 rounded bg-slate-200 p-5 shadow duration-300 ease-in-out hover:shadow-lg">
       <Image src={image} alt={title} height={100} width={100} />
 
       <div className="flex flex-col">

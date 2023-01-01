@@ -8,7 +8,7 @@ import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
   const { data: entries, isLoading } = trpc.entries.getAll.useQuery();
-  console.log(entries);
+
   return (
     <>
       <Head>
@@ -23,12 +23,13 @@ const Home: NextPage = () => {
           {!isLoading &&
             entries?.map((entry) => {
               return (
-                <Entry
-                  key={entry.id}
-                  title={entry.title}
-                  image={entry.image}
-                  date={entry.date}
-                />
+                <Link key={entry.id} href={`/${entry.id}`} className="h-full">
+                  <Entry
+                    title={entry.title}
+                    image={entry.image}
+                    date={entry.date}
+                  />
+                </Link>
               );
             })}
         </div>
