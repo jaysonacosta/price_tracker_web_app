@@ -2,6 +2,8 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
+import Entry from "../components/Entry";
+
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
@@ -14,11 +16,20 @@ const Home: NextPage = () => {
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-stone-200">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+      <main className="p-5">
+        <h1 className="text-3xl font-bold">Tracked Items</h1>
+        <br />
+        <div className="container mx-auto grid grid-cols-2 gap-4">
           {!isLoading &&
             entries?.map((entry) => {
-              return <div key={entry.id}>{entry.title}</div>;
+              return (
+                <Entry
+                  key={entry.id}
+                  title={entry.title}
+                  image={entry.image}
+                  date={entry.date}
+                />
+              );
             })}
         </div>
       </main>
