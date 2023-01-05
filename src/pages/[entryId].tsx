@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Image from "next/image";
 
 import { trpc } from "../utils/trpc";
 
@@ -18,13 +19,22 @@ import {
 } from "chart.js";
 
 const EntryPage: NextPage = () => {
-  const router = useRouter();
+  const { query, isReady } = useRouter();
+
   const { data: prices, isLoading } = trpc.prices.getPricesById.useQuery(
     {
-      id: router.query.entryId as string,
+      id: query.entryId as string,
     },
-    { enabled: router.isReady }
+    { enabled: isReady }
   );
+
+  const { data: entry } = trpc.entries.getEntryById.useQuery(
+    {
+      id: query.entryId as string,
+    },
+    { enabled: isReady }
+  );
+
   const labels = prices?.map((entry) => {
     return Intl.DateTimeFormat("en-US").format(entry.date);
   });
@@ -33,7 +43,7 @@ const EntryPage: NextPage = () => {
     labels,
     datasets: [
       {
-        label: "Dataset",
+        label: "Price",
         data: prices
           ? prices.map((entry) => {
               return Number(entry.price.replace(/[^0-9.-]+/g, ""));
@@ -44,6 +54,8 @@ const EntryPage: NextPage = () => {
       },
     ],
   };
+
+  const options = { plugins: { legend: { display: false } } };
 
   ChartJS.register(
     CategoryScale,
@@ -62,7 +74,23 @@ const EntryPage: NextPage = () => {
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="p-5">{!isLoading && <Line data={graphData} />}</main>
+      <main className="p-5">
+        {!isLoading && entry && (
+          <>
+            <div className="flex gap-x-5">
+              <Image
+                src={entry.image}
+                height={300}
+                width={300}
+                alt={entry?.title}
+              />
+              <h1 className="truncate text-3xl font-bold">{entry?.title}</h1>
+            </div>
+            <br />
+            <Line data={graphData} options={options} />
+          </>
+        )}
+      </main>
     </>
   );
 };
