@@ -19,6 +19,7 @@ import {
 } from "chart.js";
 
 import Spinner from "../components/icons/Spinner";
+import PreviousPage from "../components/PreviousPage";
 
 const EntryPage: NextPage = () => {
   const { query, isReady } = useRouter();
@@ -81,6 +82,8 @@ const EntryPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="p-5">
+        <PreviousPage />
+        <br />
         {isLoading && (
           <div className="flex items-center justify-center">
             <Spinner color="#60a5fa" spin={true} />
@@ -89,15 +92,20 @@ const EntryPage: NextPage = () => {
         {isError && <div>Uh oh... something went wrong.</div>}
         {entry && (
           <>
-            <div className="flex gap-x-5">
-              <Image
-                src={entry.image}
-                height={300}
-                width={300}
-                alt={entry.title}
-              />
-              <h1 className="truncate text-3xl font-bold">{entry?.title}</h1>
+            <div className="flex h-32 gap-x-5">
+              <div className="relative min-w-[128px] rounded bg-white">
+                <Image
+                  src={entry.image}
+                  fill={true}
+                  alt={entry.title}
+                  className="object-contain p-2"
+                />
+              </div>
+
+              <h1 className="truncate text-3xl font-bold">{entry.title}</h1>
             </div>
+            <br />
+            <hr />
             <br />
             <Line data={graphData} options={options} />
           </>
