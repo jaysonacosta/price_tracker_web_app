@@ -5,8 +5,12 @@ import { trpc } from "../../utils/trpc";
 const SearchBar: React.FC = () => {
   const [query, setQuery] = useState("");
   const [isValid, setValidity] = useState(false);
-
-  const { mutate, data } = trpc.urls.postUrl.useMutation();
+  const utils = trpc.useContext();
+  const { mutate } = trpc.urls.postUrl.useMutation({
+    onSuccess() {
+      setTimeout(() => utils.entries.getAll.invalidate(), 2250);
+    },
+  });
 
   const updateQuery = (input: string) => {
     validation(input);
