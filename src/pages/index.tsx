@@ -7,6 +7,7 @@ import Entry from "../components/Entry";
 import { trpc } from "../utils/trpc";
 
 import Spinner from "../components/icons/Spinner";
+import SearchBar from "../components/SearchBar";
 
 const Home: NextPage = () => {
   const { data: entries, isLoading, isError } = trpc.entries.getAll.useQuery();
@@ -19,6 +20,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto p-5 ">
+        <h1 className="text-3xl font-bold">Track Item</h1>
+        <br />
+        <SearchBar />
+        <br />
         <h1 className="text-3xl font-bold">Tracked Items</h1>
         {isLoading && (
           <div className="flex items-center justify-center">

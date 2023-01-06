@@ -3,6 +3,7 @@ import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 import { trpc } from "../utils/trpc";
 
@@ -106,6 +107,11 @@ const EntryPage: NextPage = () => {
                 <h1 className="text-3xl font-bold line-clamp-3 md:line-clamp-2">
                   {entry.title}
                 </h1>
+                <span>
+                  <Link href={entry.url} className="text-blue-500">
+                    Amazon link
+                  </Link>
+                </span>
               </div>
             </div>
             <br />

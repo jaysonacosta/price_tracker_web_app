@@ -12,6 +12,7 @@ model entries {
   image String
   date  DateTime @db.Date
   title String
+  url   String
 }
 
 model prices {
@@ -21,4 +22,10 @@ model prices {
   entryId String   @db.ObjectId
   price   String
   title   String
+}
+
+model urls {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  date    DateTime @default(now()) @db.Date
+  url     String
 }
