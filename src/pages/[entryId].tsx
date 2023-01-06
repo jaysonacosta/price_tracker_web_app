@@ -92,8 +92,8 @@ const EntryPage: NextPage = () => {
         {isError && <div>Uh oh... something went wrong.</div>}
         {entry && (
           <>
-            <div className="flex h-32 gap-x-5">
-              <div className="relative min-w-[128px] rounded bg-white">
+            <div className="flex gap-x-5">
+              <div className="relative min-h-[128px] min-w-[128px] rounded bg-white">
                 <Image
                   src={entry.image}
                   fill={true}
@@ -102,7 +102,11 @@ const EntryPage: NextPage = () => {
                 />
               </div>
 
-              <h1 className="truncate text-3xl font-bold">{entry.title}</h1>
+              <div>
+                <h1 className="text-3xl font-bold line-clamp-3 md:line-clamp-2">
+                  {entry.title}
+                </h1>
+              </div>
             </div>
             <br />
             <hr />

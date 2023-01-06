@@ -20,9 +20,9 @@ const Entry: React.FC<Props> = ({ title, image, date }) => {
       </div>
 
       <div className="flex flex-col overflow-hidden">
-        <span className="text-lg font-semibold truncate">{title}</span>
+        <span className="truncate text-lg font-semibold">{title}</span>
         <span className="text-neutral-500">
-          {Intl.DateTimeFormat("en-US").format(date)}
+          Tracking since: {Intl.DateTimeFormat("en-US").format(date)}
         </span>
       </div>
     </div>

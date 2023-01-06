@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="p-5">
+      <main className="container mx-auto p-5 ">
         <h1 className="text-3xl font-bold">Tracked Items</h1>
         {isLoading && (
           <div className="flex items-center justify-center">
@@ -27,7 +27,7 @@ const Home: NextPage = () => {
         )}
         {isError && <div>Uh oh... something went wrong.</div>}
         <br />
-        <div className="container mx-auto grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {entries &&
             entries.map((entry) => {
               return (
