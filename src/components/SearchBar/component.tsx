@@ -23,7 +23,6 @@ const SearchBar: React.FC = () => {
   };
 
   const submit = () => {
-    console.log(query);
     if (isValid) {
       mutate({ url: query });
     }
