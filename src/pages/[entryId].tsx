@@ -18,10 +18,16 @@ import {
   Legend,
 } from "chart.js";
 
+import Spinner from "../components/icons/Spinner";
+
 const EntryPage: NextPage = () => {
   const { query, isReady } = useRouter();
 
-  const { data: prices, isLoading } = trpc.prices.getPricesById.useQuery(
+  const {
+    data: prices,
+    isLoading,
+    isError,
+  } = trpc.prices.getPricesById.useQuery(
     {
       id: query.entryId as string,
     },
@@ -70,19 +76,25 @@ const EntryPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Price Tracker</title>
+        <title>Price Tracker | Test</title>
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="p-5">
-        {!isLoading && entry && (
+        {isLoading && (
+          <div className="flex items-center justify-center">
+            <Spinner color="#60a5fa" spin={true} />
+          </div>
+        )}
+        {isError && <div>Uh oh... something went wrong.</div>}
+        {entry && (
           <>
             <div className="flex gap-x-5">
               <Image
                 src={entry.image}
                 height={300}
                 width={300}
-                alt={entry?.title}
+                alt={entry.title}
               />
               <h1 className="truncate text-3xl font-bold">{entry?.title}</h1>
             </div>

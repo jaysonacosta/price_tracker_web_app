@@ -6,8 +6,10 @@ import Entry from "../components/Entry";
 
 import { trpc } from "../utils/trpc";
 
+import Spinner from "../components/icons/Spinner";
+
 const Home: NextPage = () => {
-  const { data: entries, isLoading } = trpc.entries.getAll.useQuery();
+  const { data: entries, isLoading, isError } = trpc.entries.getAll.useQuery();
 
   return (
     <>
@@ -18,10 +20,16 @@ const Home: NextPage = () => {
       </Head>
       <main className="p-5">
         <h1 className="text-3xl font-bold">Tracked Items</h1>
+        {isLoading && (
+          <div className="flex items-center justify-center">
+            <Spinner color="#60a5fa" spin={true} />
+          </div>
+        )}
+        {isError && <div>Uh oh... something went wrong.</div>}
         <br />
         <div className="container mx-auto grid grid-cols-2 gap-4">
-          {!isLoading &&
-            entries?.map((entry) => {
+          {entries &&
+            entries.map((entry) => {
               return (
                 <Link key={entry.id} href={`/${entry.id}`} className="h-full">
                   <Entry
