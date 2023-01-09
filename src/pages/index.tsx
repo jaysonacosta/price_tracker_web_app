@@ -10,7 +10,11 @@ import Spinner from "../components/icons/Spinner";
 import SearchBar from "../components/SearchBar";
 
 const Home: NextPage = () => {
-  const { data: entries, isLoading, isError } = trpc.entries.getAll.useQuery();
+  const {
+    data: entries,
+    isLoading,
+    isError,
+  } = trpc.entries.getAll.useQuery(undefined, { refetchOnWindowFocus: false });
 
   return (
     <>

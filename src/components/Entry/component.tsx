@@ -20,7 +20,7 @@ const Entry: React.FC<Props> = ({ title, image, date }) => {
       </div>
 
       <div className="flex flex-col overflow-hidden">
-        <span className="truncate text-lg font-semibold">{title}</span>
+        <span className="text-lg font-semibold line-clamp-2">{title}</span>
         <span className="text-neutral-500">
           Tracking since: {Intl.DateTimeFormat("en-US").format(date)}
         </span>

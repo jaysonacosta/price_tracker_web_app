@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Search from "../icons/Search";
 import { trpc } from "../../utils/trpc";
+import Tooltip from "../Tooltip";
 
 const SearchBar: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -8,7 +9,7 @@ const SearchBar: React.FC = () => {
   const utils = trpc.useContext();
   const { mutate } = trpc.urls.postUrl.useMutation({
     onSuccess() {
-      setTimeout(() => utils.entries.getAll.invalidate(), 2250);
+      setTimeout(() => utils.entries.getAll.invalidate(), 3000);
     },
   });
 
@@ -34,16 +35,18 @@ const SearchBar: React.FC = () => {
 
   return (
     <div className="flex gap-x-2">
-      <input
-        type="text"
-        placeholder="https://www.amazon.com/"
-        className={`${
-          !isValid && query.length > 0
-            ? "border-4 border-red-400"
-            : "border-none"
-        } w-full rounded p-3 font-semibold`}
-        onChange={(e) => updateQuery(e.target.value)}
-      />
+      <Tooltip message="URL is invalid." visible={!isValid && query.length > 0}>
+        <input
+          type="text"
+          placeholder="https://www.amazon.com/"
+          className={`${
+            !isValid && query.length > 0
+              ? "border-4 border-red-400"
+              : "border-none"
+          } h-full w-full rounded p-3 font-semibold`}
+          onChange={(e) => updateQuery(e.target.value)}
+        />
+      </Tooltip>
       <button className="rounded bg-slate-200 p-3" onClick={submit}>
         <Search />
       </button>
