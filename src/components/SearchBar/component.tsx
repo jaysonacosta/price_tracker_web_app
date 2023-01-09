@@ -9,7 +9,7 @@ const SearchBar: React.FC = () => {
   const utils = trpc.useContext();
   const { mutate } = trpc.urls.postUrl.useMutation({
     onSuccess() {
-      setTimeout(() => utils.entries.getAll.invalidate(), 3000);
+      setTimeout(() => utils.entries.getAll.invalidate(), 5000);
     },
   });
 
@@ -30,6 +30,8 @@ const SearchBar: React.FC = () => {
   const submit = () => {
     if (isValid) {
       mutate({ url: query });
+      setQuery("");
+      setValidity(false);
     }
   };
 
@@ -42,6 +44,7 @@ const SearchBar: React.FC = () => {
           className={`${
             !isValid && query.length > 0 ? "focus:outline-red-300" : null
           } h-full w-full rounded p-3 font-semibold`}
+          value={query}
           onChange={(e) => updateQuery(e.target.value)}
         />
       </Tooltip>

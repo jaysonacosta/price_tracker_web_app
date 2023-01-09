@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     data: entries,
     isLoading,
     isError,
-  } = trpc.entries.getAll.useQuery(undefined, { refetchOnWindowFocus: false });
+  } = trpc.entries.getAll.useQuery();
 
   return (
     <>

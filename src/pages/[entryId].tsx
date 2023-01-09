@@ -78,7 +78,7 @@ const EntryPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Price Tracker | Test</title>
+        <title>{`Price Tracker${entry ? ` | ${entry.title}` : ""}`}</title>
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
