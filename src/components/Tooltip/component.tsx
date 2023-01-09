@@ -16,7 +16,7 @@ const Tooltip: React.FC<Props> = ({ message, visible, children }) => {
         <div
           className={`${
             visible && isTransitioned ? "scale-100" : "scale-0"
-          } absolute left-0 right-0 -top-12 ml-auto mr-auto w-max rounded bg-red-200 p-2 text-center duration-200 ease-in-out`}
+          } absolute left-0 right-0 -top-12 ml-auto mr-auto w-max rounded bg-red-300 p-2 text-center duration-200 ease-in-out`}
         >
           {message}
         </div>

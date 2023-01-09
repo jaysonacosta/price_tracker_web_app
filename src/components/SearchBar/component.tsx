@@ -40,9 +40,7 @@ const SearchBar: React.FC = () => {
           type="text"
           placeholder="https://www.amazon.com/"
           className={`${
-            !isValid && query.length > 0
-              ? "border-4 border-red-400"
-              : "border-none"
+            !isValid && query.length > 0 ? "focus:outline-red-300" : null
           } h-full w-full rounded p-3 font-semibold`}
           onChange={(e) => updateQuery(e.target.value)}
         />
