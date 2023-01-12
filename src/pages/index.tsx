@@ -3,9 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 import Entry from "../components/Entry";
-
 import { trpc } from "../utils/trpc";
-
 import Spinner from "../components/icons/Spinner";
 import SearchBar from "../components/SearchBar";
 

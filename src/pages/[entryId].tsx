@@ -1,12 +1,8 @@
 import { type NextPage } from "next";
-
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-
-import { trpc } from "../utils/trpc";
-
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -19,6 +15,7 @@ import {
   Legend,
 } from "chart.js";
 
+import { trpc } from "../utils/trpc";
 import Spinner from "../components/icons/Spinner";
 import PreviousPage from "../components/PreviousPage";
 
