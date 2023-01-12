@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Checking for lint errors..."
+npm run lint
+
+echo "Building..."
+npm run build
+
+echo "Ready to commit!"
+
+
