@@ -8,11 +8,7 @@ import Spinner from "../components/icons/Spinner";
 import SearchBar from "../components/SearchBar";
 
 const Home: NextPage = () => {
-  const {
-    data: entries,
-    isLoading,
-    isError,
-  } = trpc.entries.getAll.useQuery();
+  const { data: entries, isLoading, isError } = trpc.entries.getAll.useQuery();
 
   return (
     <>
@@ -43,6 +39,7 @@ const Home: NextPage = () => {
                     title={entry.title}
                     image={entry.image}
                     date={entry.date}
+                    id={entry.id}
                   />
                 </Link>
               );

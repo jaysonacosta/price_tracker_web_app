@@ -8,4 +8,9 @@ export const pricesRouter = router({
     .query(({ ctx, input }) => {
       return ctx.prisma.prices.findMany({ where: { entryId: input.id } });
     }),
+  deletePricesByEntryId: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.prices.deleteMany({ where: { entryId: input.id } });
+    }),
 });

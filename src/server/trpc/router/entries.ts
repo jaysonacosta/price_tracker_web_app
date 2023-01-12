@@ -11,4 +11,9 @@ export const entriesRouter = router({
     .query(({ ctx, input }) => {
       return ctx.prisma.entries.findUnique({ where: { id: input.id } });
     }),
+  deleteEntryById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.entries.delete({ where: { id: input.id } });
+    }),
 });
