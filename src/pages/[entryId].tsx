@@ -15,6 +15,7 @@ import {
   Legend,
 } from "chart.js";
 
+import PriceTable from "../components/PriceTable";
 import { trpc } from "../utils/trpc";
 import Spinner from "../components/icons/Spinner";
 import PreviousPage from "../components/PreviousPage";
@@ -60,8 +61,6 @@ const EntryPage: NextPage = () => {
     ],
   };
 
-  const options = { plugins: { legend: { display: false } } };
-
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -79,7 +78,7 @@ const EntryPage: NextPage = () => {
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="p-5">
+      <main className="container mx-auto p-5">
         <PreviousPage />
         <br />
         {isLoading && (
@@ -88,7 +87,7 @@ const EntryPage: NextPage = () => {
           </div>
         )}
         {isError && <div>Uh oh... something went wrong.</div>}
-        {entry && (
+        {entry && prices && (
           <>
             <div className="flex gap-x-5">
               <div className="relative min-h-[128px] min-w-[128px] rounded bg-white">
@@ -114,7 +113,21 @@ const EntryPage: NextPage = () => {
             <br />
             <hr />
             <br />
-            <Line data={graphData} options={options} />
+            <div className="flex flex-col gap-4 xl:flex-row">
+              <div className="flex-1">
+                <Line
+                  className="w-full"
+                  data={graphData}
+                  options={{
+                    plugins: { legend: { display: false } },
+                    maintainAspectRatio: false,
+                  }}
+                />
+              </div>
+              <div className="flex-1">
+                <PriceTable prices={prices} />
+              </div>
+            </div>
           </>
         )}
       </main>
